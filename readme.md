@@ -1,4 +1,4 @@
-# WorkTrackr
+# 📒WorkTrackr/TODO List
 
 I want to keep track of what I do every day, so I plan to create a to-do list app to familiarize myself with and learn how to deploy Python Flask applications and use Git.
 
