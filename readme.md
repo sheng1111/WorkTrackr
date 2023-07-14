@@ -1,6 +1,6 @@
 # WorkTrackr
 
-Aims to keep track of daily tasks and activities, this project is developed to create a to-do list and to familiarize myself with Python Flask deployment.
+I want to keep track of what I do every day, so I plan to create a to-do list app to familiarize myself with and learn how to deploy Python Flask applications and use Git.
 
 ## Installation
 
