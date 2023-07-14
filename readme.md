@@ -29,7 +29,7 @@ Follow the steps below to install and set up the project:
 
 4. Start the project:
 
-    Execute the following command in the terminal to launch the Flask application:
+    Modify the parameters in "app.py" for deployment on the internet:
 
     ```python
     if __name__ == '__main__':
