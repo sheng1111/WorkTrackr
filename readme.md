@@ -33,7 +33,7 @@ Follow the steps below to install and set up the project:
 
     ```python
     if __name__ == '__main__':
-        app.run(host='0.0.0.0', port='your-port', debug=True)
+        app.run(host='0.0.0.0', port='your-port', debug=False)
     ```
 
 ## Usage
