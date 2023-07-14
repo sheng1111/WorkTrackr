@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Job Log</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/codemirror.css" />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+
+  <body>
+    <div
+      class="container custom-border"
+      style="margin-top: 3rem; margin-bottom: 3rem"
+    >
+      <nav class="navbar nav-pills mb-3">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./record">Record</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="./todo">Todo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#"></a>
+          </li>
+        </ul>
+      </nav>
+      <hr />
+
+      <div class="container">
+        <h3>Add Todo List</h3>
+        <form id="todo-form" action="/addTodo" method="POST">
+          <div class="row">
+            <div class="form-group col-md-2">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date" name="date" />
+            </div>
+            <div class="form-group col-md-3">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" />
+            </div>
+            <div class="form-group col-md-5">
+              <label for="note">Note</label>
+              <input type="text" class="form-control" id="note" name="note" />
+            </div>
+            <div class="form-group col-md-1" style="padding-top: 1.5rem">
+              <button type="submit" class="btn btn-primary">submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="container" style="margin-top: 2rem">
+        <h3>Todo List</h3>
+        <ul id="todo-list" class="list-group">
+          {% for todo in todos %}
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+            style="padding: 1rem"
+          >
+            <div>
+              <span>{{ todo[1] }}</span>
+              <span>{{ todo[2] }}</span>
+            </div>
+            <div>
+              <form
+                class="deleteForm"
+                action="/deleteTodo"
+                method="POST"
+                style="display: inline"
+              >
+                <input type="hidden" name="id" value="{{ todo[0] }}" />
+                <button type="submit" class="btn btn-danger btn-sm">del</button>
+              </form>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <script src="../static/bootstrap.bundle.min.js"></script>
+    <script src="../static/codemirror.js"></script>
+    <script>
+      document.querySelectorAll(".deleteForm").forEach((form) => {
+        form.addEventListener("submit", (event) => {
+          if (!confirm("確定要刪除此待辦事項嗎？")) {
+            event.preventDefault();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

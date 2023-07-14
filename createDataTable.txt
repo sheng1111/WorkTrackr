@@ -1,0 +1,27 @@
+CREATE TABLE "worktrackr" (
+	"id"	INTEGER NOT NULL,
+	"date"	TEXT,
+	"period"	TEXT,
+	"taskType"	TEXT,
+	"taskName"	TEXT,
+	"status"	TEXT,
+	"note"	TEXT,
+	"remark"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)
+CREATE TABLE "todo" (
+	"id"	INTEGER NOT NULL,
+	"date"	TEXT,
+	"name"	TEXT,
+	"note"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+)
+CREATE TABLE "app_info" (
+	"id"	INTEGER NOT NULL,
+	"name"	TEXT,
+	"version"	TEXT,
+	"aurthor"	TEXT,
+	"date"	TEXT,
+	"remark"	TEXT,
+	PRIMARY KEY("id")
+)

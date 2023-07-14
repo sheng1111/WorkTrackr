@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Job Log</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/codemirror.css" />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+
+  <body>
+    <div
+      class="container custom-border"
+      style="margin-top: 3rem; margin-bottom: 3rem"
+    >
+      <nav class="navbar nav-pills mb-3">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="./record">Record</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./todo">Todo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#"></a>
+          </li>
+        </ul>
+      </nav>
+      <hr />
+      <div class="container">
+        <h3>Add work status</h3>
+        <form id="work-form" action="/addRecord" method="POST">
+          <div class="row">
+            <div class="form-group col-md-2">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date" name="date" />
+            </div>
+            <div class="form-group col-md-1">
+              <label for="period">Period</label>
+              <select class="form-control" id="period" name="period">
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="taskType">Type</label>
+              <select class="form-control" id="taskType" name="taskType">
+                <option value="rnd">RnD</option>
+                <option value="job">Job</option>
+                <option value="course">Course</option>
+                <option value="project">Project</option>
+                <option value="businessTrip">BusinessTrip</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-5">
+              <label for="taskName">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="taskName"
+                name="taskName"
+              />
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="status">Status</label>
+              <select class="form-control" id="status" name="status">
+                <option value="completed">Completed</option>
+                <option value="executing">Executing</option>
+                <option value="incomplete">Incomplete</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem; margin-bottom: 1rem">
+            <label for="note">Note</label>
+            <!-- use inline-block-->
+            <div
+              class="form-check"
+              style="display: inline-block; margin-left: 1rem"
+            >
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="addThoghtsCheck"
+              />
+              <label class="form-check-label" for="remark"> Remark </label>
+            </div>
+
+            <!-- Note textarea -->
+            <textarea
+              class="form-control"
+              id="note"
+              name="note"
+              rows="5"
+            ></textarea>
+          </div>
+
+          <div
+            class="form-group form-group-thoughts"
+            style="margin-top: 1rem; margin-bottom: 2rem"
+          >
+            <!-- Remark textarea -->
+            <label>Remark</label>
+            <textarea
+              class="form-control"
+              id="remark"
+              name="remark"
+              rows="2"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">submit</button>
+          <br />
+          <br />
+        </form>
+      </div>
+    </div>
+
+    <script src="../static/bootstrap.bundle.min.js"></script>
+    <script src="../static/codemirror.js"></script>
+    <!-- codemirror -->
+    <script>
+      var textarea = document.getElementById("note");
+      var editor = CodeMirror.fromTextArea(textarea, {
+        lineNumbers: true,
+        theme: "yonce",
+      });
+
+      var addThoghtsCheck = document.getElementById("addThoghtsCheck");
+      var formGroupThoughts = document.querySelector(".form-group-thoughts");
+      addThoghtsCheck.addEventListener("change", function () {
+        formGroupThoughts.style.display = this.checked ? "block" : "none";
+      });
+    </script>
+  </body>
+</html>

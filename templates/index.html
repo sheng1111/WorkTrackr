@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Job Log</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/codemirror.css" />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+
+  <body>
+    <div
+      class="container custom-border"
+      style="margin-top: 3rem; margin-bottom: 3rem"
+    >
+      <nav class="navbar nav-pills mb-3">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="./">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./record">Record</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./todo">Todo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#"></a>
+          </li>
+        </ul>
+      </nav>
+      <hr />
+      <div class="contribution-chart-container">
+        <canvas id="contributionChart"></canvas>
+      </div>
+    </div>
+
+    <script src="../static/chart.js"></script>
+    <script src="../static/bootstrap.bundle.min.js"></script>
+    <script src="../static/codemirror.js"></script>
+    <script>
+      const totalRecordsPerDay = {{ total_records_per_day|tojson }};
+      const labels = totalRecordsPerDay.map((_, index) => {
+        const date = new Date();
+        date.setDate(date.getDate() - index);
+        return date.toLocaleDateString('zh-hant', { month: 'short', day: 'numeric' });
+      });
+
+      const ctx = document.getElementById("contributionChart");
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: labels.reverse(),
+              datasets: [
+                {
+                  label: "Total records per day",
+                  data: totalRecordsPerDay,
+                  backgroundColor: "rgba(54, 162, 235, 0.5)", // set black-color
+                  borderColor: "rgba(54, 162, 235, 1)", // set color
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              aspectRatio: 0.85,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 10,
+                  grid: {
+                    color: "rgba(0, 0, 0, 0.1)",
+                    borderColor: "rgba(0, 0, 0, 0.3)",
+                    borderWidth: 1,
+                  },
+                  ticks: {
+                    color: "rgba(0, 0, 0, 0.7)",
+                  },
+                },
+              },
+            },
+          });
+    </script>
+  </body>
+</html>

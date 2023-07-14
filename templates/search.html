@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>Job Log</title>
+    <link rel="stylesheet" href="../static/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/codemirror.css" />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+
+  <body>
+    <div
+      class="container custom-border"
+      style="margin-top: 3rem; margin-bottom: 3rem"
+    >
+      <nav class="navbar nav-pills mb-3">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="./">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./record">Record</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./todo">Todo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="./search">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#"></a>
+          </li>
+        </ul>
+      </nav>
+      <hr />
+
+      <!-- Serach -->
+      <form action="/search" method="POST">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="date_filter">Select-Time：</label>
+            <select class="form-control" id="date_filter" name="date_filter">
+              <option value="today">Today</option>
+              <option value="thisWeek">Week</option>
+              <option value="thisMonth">Month</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3" id="custom_start_date">
+            <label for="startDate">Start-Date：</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              name="startDate"
+              required
+              {%
+              if
+              date_filter
+              !="custom"
+              %}
+              disabled
+              {%
+              endif
+              %}
+            />
+          </div>
+
+          <div class="form-group col-md-3" id="custom_end_date">
+            <label for="endDate">End-Date：</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              name="endDate"
+              required
+              {%
+              if
+              date_filter
+              !="custom"
+              %}
+              disabled
+              {%
+              endif
+              %}
+            />
+          </div>
+          <div class="form-group col-md-1" style="padding-top: 1.5rem">
+            <button type="submit" class="btn btn-primary">search</button>
+          </div>
+      </form>
+
+      <!-- Result -->
+      <div style="margin-top: 2rem">
+        <h3>Result：</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Note</th>
+              <th>Remark</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in records %}
+            <tr>
+              <td>{{ record['date'] }}</td>
+              <td>{{ record['taskType'] }}</td>
+              <td>{{ record['taskName'] }}</td>
+              <td>{{ record['status'] }}</td>
+              <td class="long-text">{{ record['note'] }}</td>
+              <td class="long-text">{{ record['remark'] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="../static/bootstrap.bundle.min.js"></script>
+    <script src="../static/codemirror.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var dateFilterSelect = document.getElementById("date_filter");
+        var startDateInput = document.getElementById("startDate");
+        var endDateInput = document.getElementById("endDate");
+
+        dateFilterSelect.addEventListener("change", function () {
+          var selectedValue = dateFilterSelect.value;
+          if (selectedValue === "custom") {
+            startDateInput.disabled = false;
+            endDateInput.disabled = false;
+          } else {
+            startDateInput.disabled = true;
+            endDateInput.disabled = true;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
