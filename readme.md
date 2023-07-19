@@ -44,6 +44,16 @@ Follow the steps below to install and set up the project:
 python3 app.py
  ```
 
+### APP-Preview
+
+![index](https://github.com/sheng1111/WorkTrackr/assets/37472419/5e22fefd-d3e7-4e90-a2d7-3e6fec44585b)
+
+![record](https://github.com/sheng1111/WorkTrackr/assets/37472419/bac1a166-389b-4ba2-bd53-a68b12406971)
+
+![todo list](https://github.com/sheng1111/WorkTrackr/assets/37472419/7d5d100d-e82d-461d-bffe-8f3b1bd1d2d8)
+
+![search](https://github.com/sheng1111/WorkTrackr/assets/37472419/79d8fd57-9bcf-48a4-9e66-c712d00d2295)
+
 ## Author
 
 😊sheng1111
